@@ -1,0 +1,22 @@
+<clr-dropdown>
+    <span style="cursor: pointer;" clrDropdownTrigger>
+        <cds-icon [shape]="iconShape"></cds-icon>
+    </span>
+    <clr-dropdown-menu clrPosition="right-top" *clrIfOpen>
+        <button aria-label="Add Reportee" clrDropdownItem (click)="openAddReporteeModal = true">
+            <cds-icon shape="plus"></cds-icon>Add Reportee
+        </button>
+        <button aria-label="Edit Details" clrDropdownItem>
+            <cds-icon shape="pencil"></cds-icon>Edit Details
+        </button>
+        <button aria-label="Delete Employee" clrDropdownItem>
+            <cds-icon shape="ban"></cds-icon>Delete Employee
+        </button>
+        <button aria-label="Change Reporting Line" clrDropdownItem>
+            <cds-icon shape="two-way-arrows"></cds-icon>Change Reporting Line
+        </button>
+    </clr-dropdown-menu>
+</clr-dropdown>
+
+
+<app-add-reportee [manager]="data" *ngIf="openAddReporteeModal" [openAddReporteeModal]="openAddReporteeModal" (openAddReporteeModalChange)="openAddReporteeModal"></app-add-reportee>

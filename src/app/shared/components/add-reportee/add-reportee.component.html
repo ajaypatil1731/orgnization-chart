@@ -1,0 +1,23 @@
+<clr-modal [(clrModalOpen)]="openAddReporteeModal">
+<h4 class="modal-title">Add New Reportee</h4>
+    <div class="modal-body">
+        <p> Add new employee who will report directly to this person. Provide details like name, designation, email and
+            phone to create their profile in orgnization chart.</p>
+        <form clrForm clrLayout="horizontal">
+            <clr-input-container>
+                <label class="clr-col-md-4">Manager Name</label>
+                <label style="opacity: 0.6;" class="clr-col-md-8">{{manager.name}}</label>
+            </clr-input-container>
+            <clr-input-container>
+                <label for="employee-name" class="clr-col-md-4">Employee Name</label>
+                <input clrInput type="text" class="clr-col-md-8" [(ngModel)]="newReportee.name" name="employee-name" id="employee-name" required />
+                <clr-control-error>This field is required</clr-control-error>
+            </clr-input-container>
+        </form>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline" (click)="openAddReporteeModal = false">Cancel</button>
+        <button type="submit" class="btn btn-primary" (click)="addNewReportee()">ADD REPORTEE</button>
+    </div>
+</clr-modal>
