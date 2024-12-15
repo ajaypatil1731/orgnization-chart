@@ -1,0 +1,30 @@
+<clr-modal [(clrModalOpen)]="openAddReporteeModal" (clrModalOpenChange)="dismissModal()" [clrModalPreventClose]="true" (clrModalAlternateClose)="showConfirm = true" #modal>
+    <h4 class="modal-title">Delete Employee</h4>
+    <div class="modal-body">
+        <div> Deleting this employee will reassign to their direct repoertees to the employee's manager. Confirm this action to remove the employee from the orgnization chart and update hierarchy accordingly.</div>
+        <!-- Employee Name -->
+         <div>
+            <p>
+                <label class="clr-col-md-4">Employee Name</label>
+                <label style="opacity: 0.6;" class="clr-col-md-8">{{ employee.name }}</label>
+            </p>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline" (click)="dismissModal()">CANCEL</button>
+        <button type="submit" class="btn btn-primary" (click)="modal.close()">DELETE </button>
+    </div>
+</clr-modal>
+
+<clr-modal [(clrModalOpen)]="showConfirm">
+    <h3 class="modal-title">Confirmation</h3>
+    <div class="modal-body">
+      <p>Are you sure want to delete this employee?</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline" (click)="showConfirm = false">Cancel</button>
+      <button type="button" class="btn btn-primary" (click)="deleteEmployee();">
+        Yes
+      </button>
+    </div>
+  </clr-modal>

@@ -1,0 +1,10 @@
+.w-90 {
+    width: 90%;
+}
+::ng-deep clr-select-container {
+    .clr-control-container {
+        .clr-select-wrapper {
+            width: 100%;
+        }
+    }
+}

@@ -1,5 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 
-@import '@cds/core/global.min.css';
-@import '@cds/city/css/bundles/default.min.css';
-@import '@cds/core/styles/theme.dark.css';
+@import "@cds/core/global.min.css";
+@import "@cds/city/css/bundles/default.min.css";
+@import "@cds/core/styles/theme.dark.css";
+
+form {
+  &.emp-form {
+    padding: 0;
+    display: inline;
+  }
+}

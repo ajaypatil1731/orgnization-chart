@@ -15,9 +15,9 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     console.log(this.router.url);
     this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd) // Filter only NavigationStart events
+      filter(event => event instanceof NavigationEnd) // Filter only NavigationEnd events
     ).subscribe(event => {
-      // Detect when navigation starts
+      // Detect when navigation ends
       console.log('Navigation started');
       this.selectedValue = this.router.url.indexOf('grid-view') !== -1 ? 'grid-view' : 'graph-view';
     });

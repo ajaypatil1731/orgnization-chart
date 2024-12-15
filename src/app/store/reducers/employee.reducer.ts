@@ -1,5 +1,6 @@
-import { createReducer } from "@ngrx/store";
+import { createReducer, on } from "@ngrx/store";
 import { Employee } from "../../models/employee.model";
+import { addEmployee, changeReporteeManager, deleteEmployee, updateEmployee } from "../actions/empolyee.action";
 
 const initialState: Employee[] = [
           {
@@ -9,6 +10,7 @@ const initialState: Employee[] = [
             "email": "john.doe@company.com",
             "phone": "+1 123-456-7890",
             "reports_to": "01012168",
+            "manager": '',
             "id": "01012168"
           },
           {
@@ -18,6 +20,7 @@ const initialState: Employee[] = [
             "email": "sarah.lee@company.com",
             "phone": "+1 123-456-7891",
             "reports_to": "01012168",
+            "manager": 'John Doe',
             "id": "01012169"
           },
           {
@@ -27,6 +30,7 @@ const initialState: Employee[] = [
             "email": "michael.brown@company.com",
             "phone": "+1 123-456-7892",
             "reports_to": "01012168",
+            "manager": 'John Doe',
             "id": "01012170"
           },
           {
@@ -36,6 +40,7 @@ const initialState: Employee[] = [
             "email": "emily.devis@company.com",
             "phone": "+1 123-456-7893",
             "reports_to": "01012168",
+            "manager": 'John Doe',
             "id": "01012171"
           },
           {
@@ -45,6 +50,7 @@ const initialState: Employee[] = [
             "email": "james.carter@company.com",
             "phone": "+1 123-456-7894",
             "reports_to": "01012169",
+            "manager": "Sarah Lee",
             "id": "01012172"
           },
           {
@@ -54,6 +60,7 @@ const initialState: Employee[] = [
             "email": "esther@company.com",
             "phone": "+1 123-456-7895",
             "reports_to": "01012169",
+            "manager": "Sarah Lee",
             "id": "01012173"
           },
           {
@@ -63,6 +70,7 @@ const initialState: Employee[] = [
             "email": "ethan.wright@company.com",
             "phone": "+1 123-456-7896",
             "reports_to": "01012169",
+            "manager": "Sarah Lee",
             "id": "01012174"
           },
           {
@@ -72,8 +80,24 @@ const initialState: Employee[] = [
             "email": "ava.johnson@company.com",
             "phone": "+1 123-456-7897",
             "reports_to": "01012170",
+            "manager": "Michael Brown",
             "id": "01012176"
           }
 ];     
 
-export const employeeReducer = createReducer(initialState);
+export const employeeReducer = createReducer(initialState,
+  on(addEmployee, (state, action)=> {
+    return [...state, action.payload];
+  }),
+  on(updateEmployee, (state, action)=> {
+    return state.map(item=> {
+      return item.id === action.payload.id ? {...item, ...action.payload }: item;
+    });
+  }),
+  on(changeReporteeManager, (state, action)=> {
+    return state;
+  }),
+  on(deleteEmployee, (state, action)=> {
+    return state;
+  })
+);

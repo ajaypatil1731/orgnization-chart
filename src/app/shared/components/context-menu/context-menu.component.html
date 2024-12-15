@@ -3,20 +3,22 @@
         <cds-icon [shape]="iconShape"></cds-icon>
     </span>
     <clr-dropdown-menu clrPosition="right-top" *clrIfOpen>
-        <button aria-label="Add Reportee" clrDropdownItem (click)="openAddReporteeModal = true">
+        <button aria-label="Add Reportee" clrDropdownItem (click)="openModal('add');">
             <cds-icon shape="plus"></cds-icon>Add Reportee
         </button>
-        <button aria-label="Edit Details" clrDropdownItem>
+        <button aria-label="Edit Details" clrDropdownItem (click)="openModal('edit');">
             <cds-icon shape="pencil"></cds-icon>Edit Details
         </button>
-        <button aria-label="Delete Employee" clrDropdownItem>
+        <button aria-label="Delete Employee" clrDropdownItem (click)="openModal('delete');">
             <cds-icon shape="ban"></cds-icon>Delete Employee
         </button>
-        <button aria-label="Change Reporting Line" clrDropdownItem>
+        <button aria-label="Change Reporting Line" clrDropdownItem (click)="openModal('change-reportee');">
             <cds-icon shape="two-way-arrows"></cds-icon>Change Reporting Line
         </button>
     </clr-dropdown-menu>
 </clr-dropdown>
 
 
-<app-add-reportee [manager]="data" *ngIf="openAddReporteeModal" [openAddReporteeModal]="openAddReporteeModal" (openAddReporteeModalChange)="openAddReporteeModal"></app-add-reportee>
+<app-add-reportee [employee]="employee" [mode]="mode" *ngIf="openAddReporteeModal && (mode === 'add' || mode === 'edit')" (dismiss)="openAddReporteeModal = false"></app-add-reportee>
+<app-delete-reportee [employee]="employee" *ngIf="openAddReporteeModal && mode === 'delete'" (dismiss)="openAddReporteeModal = false"></app-delete-reportee>
+<app-change-reportee-line-manager [employee]="employee" *ngIf="openAddReporteeModal && mode === 'change-reportee'" (dismiss)="openAddReporteeModal = false"></app-change-reportee-line-manager>

@@ -9,25 +9,27 @@
     @for (emp of employees$ | async; track emp.name) {
     <clr-dg-row [clrDgItem]="emp">
         <clr-dg-cell [className]="'context-menu-column'">
-            <app-context-menu [data]="emp" [iconShape]="'ellipsis-vertical'"></app-context-menu>
+            <ng-container *ngTemplateOutlet="contenxtMenu; context: {emp: emp}" ></ng-container>
         </clr-dg-cell>
         <clr-dg-cell>{{ emp.name }}</clr-dg-cell>
         <clr-dg-cell>{{ emp.id }}</clr-dg-cell>
-        <clr-dg-cell>{{ emp.designation }}</clr-dg-cell>
+        <clr-dg-cell>{{ emp.position }}</clr-dg-cell>
         <clr-dg-cell>{{ emp.email }}</clr-dg-cell>
         <clr-dg-cell>{{ emp.phone }}</clr-dg-cell>
-        <clr-dg-cell>{{ emp.reports_to }}</clr-dg-cell>
+        <clr-dg-cell>{{ emp.manager || '-' }}</clr-dg-cell>
     </clr-dg-row>
     }
     <clr-dg-footer>
-        <clr-dg-pagination #pagination [clrDgPageSize]="10">
+        <clr-dg-pagination #pagination [clrDgPageSize]="20">
             <clr-dg-page-size [clrPageSizeOptions]="[10, 20, 50, 100]">Employees per page</clr-dg-page-size>
             {{ pagination.firstItem + 1 }} - {{ pagination.lastItem + 1 }} of
             {{ pagination.totalItems }} employees
         </clr-dg-pagination>
     </clr-dg-footer>
 </clr-datagrid>
-
+<ng-template #contenxtMenu let-emp="emp"> 
+    <app-context-menu [employee]="emp" [iconShape]="'ellipsis-vertical'"></app-context-menu>
+</ng-template>
 @if (selected.length > 0) {
 Selected employees: <span *ngFor="let emp of selected; let last = last">{{ emp.name }}<span [hidden]="last">, </span></span>
 }

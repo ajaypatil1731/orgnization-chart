@@ -11,6 +11,8 @@ import { FormsModule } from '@angular/forms';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule } from '@ngrx/store';
 import { employeeReducer } from './store/reducers';
+import { EffectsModule } from '@ngrx/effects';
+import { EmployeeEffects } from './store/effects/employee.effect';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,7 @@ import { employeeReducer } from './store/reducers';
     StoreModule.forRoot({ 
       employee: employeeReducer
     }),
+    EffectsModule.forRoot(EmployeeEffects),
     // Instrumentation must be imported after importing StoreModule (config is optional)
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states

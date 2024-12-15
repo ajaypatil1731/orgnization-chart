@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Employee } from '../../../models/employee.model';
 
 @Component({
@@ -7,13 +7,14 @@ import { Employee } from '../../../models/employee.model';
   styleUrl: './context-menu.component.scss'
 })
 export class ContextMenuComponent {
-  @Input({ required: true }) data!: Employee;
+  @Input({ required: true }) employee!: Employee;
   @Input() iconShape: string = 'ellipsis-vertical';
   openAddReporteeModal = false;
   newReportee:Partial<Employee> = {};
+  mode: string = '';
 
-  addNewReportee() {
-    this.newReportee.reports_to = this.data.id;
-    this.openAddReporteeModal = false;
+  openModal(mode: string) {
+    this.mode = mode;
+    this.openAddReporteeModal = true;
   }
 }
