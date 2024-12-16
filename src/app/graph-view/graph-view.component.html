@@ -1,1 +1,7 @@
-<p>graph-view works!</p>
+<div #chartContainer id="chartContainer"></div>
+
+<div class="context-menu-container" *ngIf="selectedEmployee" [style.left]="contextMenuPosition.x + 'px'"
+    [style.top]="contextMenuPosition.y + 'px'">
+    <app-context-menu [employee]="selectedEmployee" (dismiss)="selectedEmployee = undefined"
+        [open]="true"></app-context-menu>
+</div>

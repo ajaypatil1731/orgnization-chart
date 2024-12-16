@@ -1,6 +1,11 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { filter } from 'rxjs';
+import { Employee } from './models/employee.model';
+import { employeeAction } from './store/actions/empolyee.action';
+import { Designation } from './models/designation.model';
+import { designationAction } from './store/actions/designation.action';
 
 @Component({
   selector: 'app-root',
@@ -10,21 +15,22 @@ import { filter } from 'rxjs';
 export class AppComponent implements OnInit {
   title = 'Orgnization Chart';
   selectedValue = 'graph-view';
-  router = inject(Router);
+  
+  constructor(private router: Router, private store: Store<{employee: Employee[], designation: Designation[]}>) {
+
+  }
 
   ngOnInit(): void {
-    console.log(this.router.url);
     this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd) // Filter only NavigationEnd events
+      filter(event => event instanceof NavigationEnd)
     ).subscribe(event => {
-      // Detect when navigation ends
-      console.log('Navigation started');
       this.selectedValue = this.router.url.indexOf('grid-view') !== -1 ? 'grid-view' : 'graph-view';
     });
+    this.store.dispatch(employeeAction.loadEmployees());
+    this.store.dispatch(designationAction.loadDesignation());
   }
 
   changeView() {
-    console.log(this.selectedValue);
     this.router.navigateByUrl(this.selectedValue);
   }
 

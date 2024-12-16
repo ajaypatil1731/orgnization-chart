@@ -1,14 +1,17 @@
-import { Injectable } from '@angular/core';
-import { of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmployeeService {
+  http = inject(HttpClient);
 
-  constructor() { }
+  getAllEmployees() {
+    return this.http.get('assets/employee.json');
+  }
 
-  getAll() {
-    return of();
+  getEmployeeDesignations() {
+    return this.http.get('assets/designations.json');
   }
 }

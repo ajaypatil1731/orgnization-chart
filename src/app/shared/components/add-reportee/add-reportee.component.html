@@ -1,12 +1,12 @@
 <form clrForm clrLayout="horizontal" [formGroup]="empForm" class="emp-form" >
     <clr-modal [(clrModalOpen)]="openAddReporteeModal" (clrModalOpenChange)="dismissModal()">
-        <h4 class="modal-title">Add New Reportee</h4>
+        <h4 class="modal-title">{{ mode === 'add' ? 'Add New' : 'Edit' }} Reportee</h4>
         <div class="modal-body">
             <p> Add new employee who will report directly to this person. Provide details like name, designation, email and phone to create their profile in orgnization chart.</p>
             <!-- Manager Name -->
             <clr-input-container>
                 <label class="clr-col-md-4">Manager Name</label>
-                <label style="opacity: 0.6;" class="clr-col-md-8">{{ employee.name }}</label>
+                <label style="opacity: 0.6;" class="clr-col-md-8">{{ mode === 'add' ? employee.name : employee.manager }}</label>
             </clr-input-container>
             <!-- Employee Name -->
             <clr-input-container>
@@ -21,9 +21,9 @@
                 <select clrSelect name="designation" id="designation" formControlName="designation" required
                     class="clr-col-md-8 w-90">
                     <option value="" selected disabled>Select Employee Designation</option>
-                    <option value="one">One</option>
-                    <option value="two">Two</option>
-                    <option value="three">Three</option>
+                    @for (dn of filteredDesignations$ | async; track dn.designation) {
+                        <option [ngValue]="dn.designation">{{dn.position}}</option>
+                    }
                 </select>
                 <clr-control-error>This field is required</clr-control-error>
             </clr-select-container>

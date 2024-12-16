@@ -14,9 +14,9 @@
                 <select clrSelect name="manager" id="manager" formControlName="manager" required
                     class="clr-col-md-8 w-90">
                     <option value="" selected disabled>Select New Reporting Manager</option>
-                    <option value="one">One</option>
-                    <option value="two">Two</option>
-                    <option value="three">Three</option>
+                    @for (manager of managerList$ | async; track manager.id) {
+                        <option [ngValue]="manager.id">{{ manager.name }}</option>
+                    }
                 </select>
                 <clr-control-error>This field is required</clr-control-error>
             </clr-select-container>

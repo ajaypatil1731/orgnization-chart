@@ -10,3 +10,40 @@ form {
     display: inline;
   }
 }
+.elipsis-container {
+  width: 100%;
+  white-space: nowrap;         /* Prevent text from wrapping */
+  overflow: hidden;            /* Hide overflowing text */
+  text-overflow: ellipsis; 
+}
+
+.align-item-center {
+  align-items: center;
+}
+
+.margin-left-10px {
+  margin-left: 10px;
+}
+
+.card{
+  &.emp-card-container {
+    margin-top: 0px;
+    box-shadow: 0px 7px 5px 0px rgba(0, 0, 0, 1);
+    border-color: black;
+  
+    .emp-name-container {
+      display: flex;
+      justify-content: space-between;
+    }
+    .emp-designation {
+      color: var(--cds-alias-object-border-color);
+      font-size: var(--\3b4 5);
+    }
+  
+    .user-icon {
+      transform: scale(3.5) translate(40%, 25%);
+      -webkit-transform: scale(3.5) translate(40%, 25%);
+      -moz-transform: scale(3.5) translate(40%, 25%);
+    }
+  }
+}

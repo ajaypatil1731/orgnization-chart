@@ -1,0 +1,82 @@
+[
+  {
+    "designation": "ceo",
+    "position": "Chief Executive Officer(CEO)",
+    "name": "John Doe",
+    "email": "john.doe@company.com",
+    "phone": "+1 123-456-7890",
+    "parentId": "",
+    "manager": "",
+    "id": "01012168"
+  },
+  {
+    "designation": "head-engg",
+    "position": "Head of Engineering",
+    "name": "Sarah Lee",
+    "email": "sarah.lee@company.com",
+    "phone": "+1 123-456-7891",
+    "parentId": "01012168",
+    "manager": "John Doe",
+    "id": "01012169"
+  },
+  {
+    "designation": "head-sales",
+    "position": "Head of Sales",
+    "name": "Michael Brown",
+    "email": "michael.brown@company.com",
+    "phone": "+1 123-456-7892",
+    "parentId": "01012168",
+    "manager": "John Doe",
+    "id": "01012170"
+  },
+  {
+    "designation": "head-mkt",
+    "position": "Head of Marketing",
+    "name": "Emily Devis",
+    "email": "emily.devis@company.com",
+    "phone": "+1 123-456-7893",
+    "parentId": "01012168",
+    "manager": "John Doe",
+    "id": "01012171"
+  },
+  {
+    "designation": "manager-engg",
+    "position": "Engineering Manager",
+    "name": "James Carter",
+    "email": "james.carter@company.com",
+    "phone": "+1 123-456-7894",
+    "parentId": "01012169",
+    "manager": "Sarah Lee",
+    "id": "01012172"
+  },
+  {
+    "designation": "ux-engg",
+    "position": "Product UX Engineer",
+    "name": "Esther Liukkonen-Olmiala",
+    "email": "esther@company.com",
+    "phone": "+1 123-456-7895",
+    "parentId": "01012169",
+    "manager": "Sarah Lee",
+    "id": "01012173"
+  },
+  {
+    "designation": "devops-engg",
+    "position": "DevOps Engineer",
+    "name": "Ethan Wright",
+    "email": "ethan.wright@company.com",
+    "phone": "+1 123-456-7896",
+    "parentId": "01012169",
+    "manager": "Sarah Lee",
+    "id": "01012174"
+  },
+  {
+    "designation": "sales-engg",
+    "position": "Sales Executive",
+    "name": "Ava Johnson",
+    "email": "ava.johnson@company.com",
+    "phone": "+1 123-456-7897",
+    "parentId": "01012170",
+    "manager": "Michael Brown",
+    "id": "01012175"
+  }
+]

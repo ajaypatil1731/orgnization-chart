@@ -10,9 +10,12 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule } from '@ngrx/store';
-import { employeeReducer } from './store/reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { EmployeeEffects } from './store/effects/employee.effect';
+import { HttpClientModule } from '@angular/common/http';
+import { designationReducer } from './store/reducers/designations.reducer';
+import { DesignationEffects } from './store/effects/designation.effect';
+import { employeeReducer } from './store/reducers/employee.reducer';
 
 @NgModule({
   declarations: [
@@ -23,13 +26,15 @@ import { EmployeeEffects } from './store/effects/employee.effect';
     FormsModule,
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     ClarityModule,
     CdsModule,
     StoreModule.forRoot({ 
-      employee: employeeReducer
+      employee: employeeReducer,
+      designation: designationReducer
     }),
-    EffectsModule.forRoot(EmployeeEffects),
+    EffectsModule.forRoot(EmployeeEffects, DesignationEffects),
     // Instrumentation must be imported after importing StoreModule (config is optional)
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states

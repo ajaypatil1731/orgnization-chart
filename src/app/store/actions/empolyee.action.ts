@@ -1,22 +1,15 @@
-import { createAction, props } from "@ngrx/store";
+import { createActionGroup, emptyProps, props } from "@ngrx/store";
 import { Employee } from "../../models/employee.model";
 
-export const addEmployee = createAction(
-    '[Employee] Add',
-    props<{payload: Employee}>()
-);
-
-export const updateEmployee = createAction(
-    '[Employee] Update',
-    props<{payload: Employee}>()
-);
-
-export const changeReporteeManager = createAction(
-    '[Employee] Change Reportee Manager',
-    props<{payload: Employee}>()
-);
-
-export const deleteEmployee = createAction(
-    '[Employee] Delete',
-    props<{payload: Employee}>()
-);
+export const employeeAction = createActionGroup({
+    source: 'Employee API',
+    events: {
+        'Load Employees': emptyProps(),
+        'Load Employees Success': props<{payload: Employee[]}>(),
+        'Load Employees Failure': emptyProps(),
+        'Add': props<{payload: Employee}>(),
+        'Update': props<{payload: Employee}>(),
+        'Change Reportee Manager': props<{payload: Employee}>(),
+        'Delete':  props<{payload: Employee}>()
+    }
+})

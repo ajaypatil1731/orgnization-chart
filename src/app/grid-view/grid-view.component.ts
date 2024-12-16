@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Employee } from '../models/employee.model';
 import { Store } from '@ngrx/store';
+import { allEmployees } from '../store/selectors/employee.selector';
 
 @Component({
   selector: 'app-grid-view',
@@ -10,15 +11,9 @@ import { Store } from '@ngrx/store';
 })
 export class GridViewComponent {
   employees$: Observable<Employee[]>;
-  //users: User[]; 
-  selected: Employee[] = []; 
-  state: Employee | undefined;
+  selected: Employee[] = [];
   constructor(private store: Store<{employee: Employee[]}>) {
-    this.employees$ = store.select('employee');
-  }
-
-  openContextMenu(emp: Employee) {
-    console.log(emp);
+    this.employees$ = store.select(allEmployees);
   }
 
 }

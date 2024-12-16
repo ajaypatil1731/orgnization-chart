@@ -1,0 +1,46 @@
+[
+  {
+    "designation": "ceo",
+    "position": "Chief Executive Officer(CEO)"
+  },
+  {
+    "designation": "head-engg",
+    "position": "Head of Engineering"
+  },
+  {
+    "designation": "head-sales",
+    "position": "Head of Sales"
+  },
+  {
+    "designation": "head-mkt",
+    "position": "Head of Marketing"
+  },
+  {
+    "designation": "manager-engg",
+    "position": "Engineering Manager"
+  },
+  {
+    "designation": "manager-sales",
+    "position": "Sales Manager"
+  },
+  {
+    "designation": "ux-engg",
+    "position": "Product UX Engineer"
+  },
+  {
+    "designation": "devops-engg",
+    "position": "DevOps Engineer"
+  },
+  {
+    "designation": "junior-engg",
+    "position": "Junior Engineer"
+  },
+  {
+    "designation": "senior-engg",
+    "position": "Senior Engineer"
+  },
+  {
+    "designation": "staff-engg",
+    "position": "Staff Software Development Engineer"
+  }
+]
