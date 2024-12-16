@@ -6,11 +6,11 @@ import { GridViewComponent } from './grid-view.component';
 import { ClrDatagridModule } from '@clr/angular';
 import { SharedModule } from '../shared/shared.module';
 
-
 @NgModule({
   declarations: [
     GridViewComponent
   ],
+
   imports: [
     CommonModule,
     GridViewRoutingModule,

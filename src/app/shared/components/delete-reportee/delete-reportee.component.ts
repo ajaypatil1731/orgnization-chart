@@ -6,24 +6,24 @@ import { Store } from '@ngrx/store';
 @Component({
   selector: 'app-delete-reportee',
   templateUrl: './delete-reportee.component.html',
-  styleUrl: './delete-reportee.component.scss'
+  styleUrls: ['./delete-reportee.component.scss']
 })
 export class DeleteReporteeComponent {
-  @Input({required: true}) employee!: Employee;
-  @Output() dismiss = new EventEmitter();
+  @Input({ required: true }) employee!: Employee;
+  @Output() dismiss = new EventEmitter<void>();
   openAddReporteeModal = true;
   showConfirm = false;
+  constructor(private store: Store<{ employee: Employee[] }>) {}
 
-  constructor(private store: Store<{employee: Employee[]}>) {}
- 
   dismissModal() {
-    this.openAddReporteeModal = false;
+    this.openAddReporteeModal = false;  
     this.dismiss.emit();
   }
 
   deleteEmployee() {
     this.showConfirm = false;
-    this.store.dispatch(employeeAction.delete({payload: this.employee}))
+    // Dispatch the delete action to remove the employee from the store
+    this.store.dispatch(employeeAction.delete({ payload: this.employee }));
     this.dismissModal();
   }
 }

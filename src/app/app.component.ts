@@ -13,25 +13,25 @@ import { designationAction } from './store/actions/designation.action';
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit {
-  title = 'Orgnization Chart';
   selectedValue = 'graph-view';
+
+  constructor(private router: Router, private store: Store<{ employee: Employee[], designation: Designation[] }>) {}
+
   
-  constructor(private router: Router, private store: Store<{employee: Employee[], designation: Designation[]}>) {
-
-  }
-
   ngOnInit(): void {
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe(event => {
+      // Change the view based on the URL (either 'grid-view' or 'graph-view')
       this.selectedValue = this.router.url.indexOf('grid-view') !== -1 ? 'grid-view' : 'graph-view';
     });
+
+    // Dispatch actions to load employee and designation data when component is initialized
     this.store.dispatch(employeeAction.loadEmployees());
     this.store.dispatch(designationAction.loadDesignation());
   }
 
-  changeView() {
+  changeView(): void {
     this.router.navigateByUrl(this.selectedValue);
   }
-
 }

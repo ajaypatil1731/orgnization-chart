@@ -24,7 +24,9 @@ import { DeleteReporteeComponent } from './components/delete-reportee/delete-rep
     CdsModule,
     ClrModalModule
   ],
-  exports: [ContextMenuComponent]
+  exports: [
+    ContextMenuComponent
+  ]
 })
 export class SharedModule {
   constructor() {

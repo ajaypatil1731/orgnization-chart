@@ -4,7 +4,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ClarityModule } from '@clr/angular';
-import { CdsModule } from '@cds/angular'
+import { CdsModule } from '@cds/angular';
 import { ClarityIcons, userIcon, homeIcon, worldIcon, usersIcon, gridViewIcon } from '@cds/core/icon';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -35,18 +35,19 @@ import { employeeReducer } from './store/reducers/employee.reducer';
       designation: designationReducer
     }),
     EffectsModule.forRoot(EmployeeEffects, DesignationEffects),
-    // Instrumentation must be imported after importing StoreModule (config is optional)
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
-      logOnly: !isDevMode(), // Restrict extension to log-only mode
+      logOnly: !isDevMode(), // Restrict extension to log-only mode in production
       autoPause: true, // Pauses recording actions and state changes when the extension window is not open
-      trace: false, //  If set to true, will include stack trace for every dispatched action, so you can see it in trace tab jumping directly to that part of code
-      traceLimit: 75, // maximum stack trace frames to be stored (in case trace option was provided as true)
-      connectInZone: true // If set to true, the connection is established within the Angular zone
+      trace: false, // Stack trace for every dispatched action (disabled in this case)
+      traceLimit: 75, // Maximum stack trace frames stored when trace is enabled
+      connectInZone: true // Ensures connection within Angular zone
     }),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [
+    AppComponent
+  ]
 })
 export class AppModule { 
   constructor() {

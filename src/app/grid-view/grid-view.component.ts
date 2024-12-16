@@ -12,8 +12,8 @@ import { allEmployees } from '../store/selectors/employee.selector';
 export class GridViewComponent {
   employees$: Observable<Employee[]>;
   selected: Employee[] = [];
-  constructor(private store: Store<{employee: Employee[]}>) {
+  
+  constructor(private store: Store<{ employee: Employee[] }>) {
     this.employees$ = store.select(allEmployees);
   }
-
 }

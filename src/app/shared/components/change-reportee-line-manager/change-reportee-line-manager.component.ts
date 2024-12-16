@@ -12,18 +12,18 @@ import { employeeAction } from '../../../store/actions/empolyee.action';
   styleUrl: './change-reportee-line-manager.component.scss'
 })
 export class ChangeReporteeLineManagerComponent {
-
-  @Input({required: true}) employee!: Employee;
-  @Output() dismiss = new EventEmitter();
+  @Input({ required: true }) employee!: Employee;
+  @Output() dismiss = new EventEmitter<void>();
   @Output() change = new EventEmitter<Employee>();
   managerList$?: Observable<Employee[]>;
+
   reportee: Partial<Employee> = {
     designation: ''
   };
   openAddReporteeModal = true;
   empForm!: FormGroup;
-  constructor(private formBuilder: FormBuilder, private store: Store<{employee: Employee[]}>) {}
 
+  constructor(private formBuilder: FormBuilder, private store: Store<{ employee: Employee[] }>) {}
 
   ngOnInit(): void {
     this.managerList$ = this.store.select(getManagerForEmployee(this.employee));
@@ -32,18 +32,18 @@ export class ChangeReporteeLineManagerComponent {
 
   private createFormControls() {
     this.empForm = this.formBuilder.group({
-      manager: ['', Validators.required],
+      manager: ['', Validators.required], 
     });
   }
 
   changeManager() {
     this.empForm.markAllAsTouched();
-    if(this.empForm.invalid) {
+    if (this.empForm.invalid) {
       return;
     }
     Object.assign(this.reportee, this.employee);
     this.reportee.parentId = this.empForm.controls['manager'].value;
-    this.store.dispatch(employeeAction.changeReporteeManager({payload: this.reportee as Employee}))
+    this.store.dispatch(employeeAction.changeReporteeManager({ payload: this.reportee as Employee }));
     this.dismissModal();
   }
 

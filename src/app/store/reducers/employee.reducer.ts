@@ -2,46 +2,63 @@ import { createReducer, on } from "@ngrx/store";
 import { Employee } from "../../models/employee.model";
 import { employeeAction } from "../actions/empolyee.action";
 
+// Initial state for the employee feature
 const initialState: Employee[] = [];
 
+//Reducer to handle actions related to employees.
 export const employeeReducer = createReducer(
-  initialState,
-  // Listen for all employee load success action 
+  initialState, 
+   
+  //When the `loadEmployeesSuccess` action is triggered
   on(employeeAction.loadEmployeesSuccess, (state, action) => {
     return action.payload;
   }),
-  // Listen for all employee load failure action
+
+  //When the `loadEmployeesFailure` action is triggered
   on(employeeAction.loadEmployeesFailure, (state, action) => {
     return [];
   }),
-  // Listen for new employee add action
+
+  //When the `add` action is triggered, a new employee is added to the state.
   on(employeeAction.add, (state, action) => {
-    return [...state, action.payload];
+    return [...state, action.payload];  // Append the new employee to the state.
   }),
-  // Listen for update employee action
+
+  //When the `update` action is triggered, an existing employee's data is updated.
   on(employeeAction.update, (state, action) => {
     return state.map((item: Employee) => {
-      if(item.id === action.payload.id) {
+      if (item.id === action.payload.id) {
+        // Update the employee's data
         return { ...item, ...action.payload };
-      } else if(item.parentId === action.payload.id) { // If change in name then update all reportees manager name
+      } else if (item.parentId === action.payload.id) {
+        // Update the manager name for all reportees (children)
         return { ...item, manager: action.payload.name };
       }
       return item;
     });
   }),
-  // Listen for change reporting manager action
+
+  //When the `changeReporteeManager` action is triggered, the manager of a reportee is updated. 
+  //The new manager is assigned based on the `parentId` from the payload.
   on(employeeAction.changeReporteeManager, (state, action) => {
-    let newManager = state.find((item: Employee)=> item.id === action.payload.parentId);
-    return state.map((item: Employee)=> {
-      return item.id === action.payload.id ? {...item, ...action.payload, ...{manager: newManager!.name}} : item;
+    let newManager = state.find((item: Employee) => item.id === action.payload.parentId);
+    return state.map((item: Employee) => {
+      return item.id === action.payload.id
+        ? { ...item, ...action.payload, manager: newManager!.name } // Update the reportee's manager name.
+        : item;
     });
   }),
-  // Listen for employee delete action
+
+  //When the `delete` action is triggered
   on(employeeAction.delete, (state, action) => {
-    let children = state.filter(item=> item.parentId === action.payload.id).map(item=> item.id);
-    state = state.map(item=> {
-      return  children.indexOf(item.id) !== -1 ? {...item, parentId: action.payload.parentId, manager: action.payload.manager } : item;
+    // Find all children (reportees) of the employee to be deleted
+    let children = state.filter(item => item.parentId === action.payload.id).map(item => item.id);
+    state = state.map(item => {
+      return children.indexOf(item.id) !== -1
+        ? { ...item, parentId: action.payload.parentId, manager: action.payload.manager } // Reassign manager for children
+        : item;
     });
-    return state.filter(item=> item.id !== action.payload.id)
+    // Return the state with the employee removed and their reportees reassigned
+    return state.filter(item => item.id !== action.payload.id);
   })
 );

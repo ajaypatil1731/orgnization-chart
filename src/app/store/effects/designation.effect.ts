@@ -8,13 +8,13 @@ import { EmployeeService } from './../../services/employee.service';
 @Injectable()
 export class DesignationEffects {
 
+  //Effect that listens for the 'Load Designation' action and triggers an HTTP request to fetch employee designations.
   loadEmployeesDesignations$ = createEffect(() => this.actions$.pipe(
-    ofType(designationAction.loadDesignation),
-    exhaustMap(() => this.employeeService.getEmployeeDesignations()
+    ofType(designationAction.loadDesignation), // Listen for the action to load designations
+    exhaustMap(() => this.employeeService.getEmployeeDesignations()  // Make an HTTP request to fetch designations
       .pipe(
-        map((data: any) => (designationAction.loadDesignationsSuccess({payload: data})
-        )),
-        catchError(() => of(designationAction.loadDesignationsFailure()))
+        map((data: any) => (designationAction.loadDesignationsSuccess({payload: data}))),
+        catchError(() => of(designationAction.loadDesignationsFailure())) // Dispatch failure action on error
       ))
     )
   );

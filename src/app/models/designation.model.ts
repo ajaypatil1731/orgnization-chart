@@ -1,4 +1,5 @@
 export interface Designation {
-    position: string,
-    designation: string
-}
+    position: string;
+    designation: string;
+  }
+  

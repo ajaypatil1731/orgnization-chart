@@ -18,6 +18,6 @@ import { ClarityIcons, cogIcon, userIcon } from '@cds/core/icon';
 })
 export class GraphViewModule { 
   constructor() {
-    ClarityIcons.addIcons(userIcon, cogIcon)
+    ClarityIcons.addIcons(userIcon, cogIcon);
   }
 }

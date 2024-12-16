@@ -1,6 +1,5 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Employee } from '../../../models/employee.model';
-
 @Component({
   selector: 'app-context-menu',
   templateUrl: './context-menu.component.html',
@@ -10,14 +9,14 @@ export class ContextMenuComponent implements OnInit {
   @Input() employee!: Employee;
   @Input() iconShape: string = '';
   @Input() open: boolean = false;
-  @ViewChild('ddTrigger', {static: true}) ddTrigger!: ElementRef;
-  @Output() dismiss = new EventEmitter();
+  @ViewChild('ddTrigger', { static: true }) ddTrigger!: ElementRef;
+  @Output() dismiss = new EventEmitter<void>();
   openAddReporteeModal = false;
-  newReportee:Partial<Employee> = {};
+  newReportee: Partial<Employee> = {};
   mode: string = '';
 
   ngOnInit(): void {
-    if(this.open) {
+    if (this.open) {
       this.ddTrigger.nativeElement.click();
     }
   }

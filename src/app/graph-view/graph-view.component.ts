@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, ViewChild} from "@angular/core";
+import { ChangeDetectorRef, Component, ElementRef, ViewChild } from "@angular/core";
 import { Employee } from "../models/employee.model";
 import { Store } from "@ngrx/store";
 import { OrgChart } from "d3-org-chart";
@@ -17,14 +17,15 @@ export class GraphViewComponent {
   selectedEmployee?: Employee;
   chart: any;
   data: any[] = [];
-  contextMenuPosition = {
-    x:0, y:0
-  };
+  contextMenuPosition = { x: 0, y: 0 };
   eventRef: any = {};
   empId = '';
+
   constructor(
-    private store: Store<{ employee: Employee[] }>, private changeDetectorRef: ChangeDetectorRef,
-    private route: ActivatedRoute, private router: Router
+    private store: Store<{ employee: Employee[] }>, 
+    private changeDetectorRef: ChangeDetectorRef,
+    private route: ActivatedRoute, 
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -41,7 +42,7 @@ export class GraphViewComponent {
     if (!this.chart) {
       this.chart = new OrgChart();
     }
-    this.data = this.data.map(item=> item.id === this.empId ? {...item, parentId: '' }: item);
+    this.data = this.data.map(item => item.id === this.empId ? { ...item, parentId: '' } : item);
     this.eventRef = {};
     this.chart
       .container(this.chartContainer.nativeElement)
@@ -50,39 +51,38 @@ export class GraphViewComponent {
       .nodeHeight(() => 146)
       .initialZoom(0.8)
       .nodeContent((d: any, i: any, nodes: any) => {
-        setTimeout(()=> {
-          if(this.eventRef[d.data.id]) { // to avoid duplicate event binding
-            return;
-          }
+        setTimeout(() => {
+          if (this.eventRef[d.data.id]) { return; }
           const nodeElement = d3.select(nodes[i]);
           const iconElement = nodeElement.node().querySelector('.context-menu-icon');
-          if (iconElement ) {
+          if (iconElement) {
             this.eventRef[d.data.id] = iconElement.addEventListener('click', this.clickEvent.bind(this, d.data));
           }
-        })
-        
-        return `<div class="card emp-card-container">
-                  <div class="card-block">
-                    <div class="card-title emp-name-container">
-                      <span class="emp-name">${d.data.name}</span>
-                      <span class="context-menu-icon">
-                        <cds-icon shape="cog"></cds-icon>
-                      </span>
-                    </div>
-                    <div class="card-text">
-                        <div class="clr-row">
-                            <div class="clr-col-md-3 clr-col-sm-3">
-                                <cds-icon shape="user" [solid]="true" [size]="'xxl'" class="user-icon"></cds-icon>
-                            </div>
-                            <div class="clr-col-md-9 clr-col-sm-9">
-                                <div class="emp-designation elipsis-container">${d.data.position}</div>
-                                <div class="elipsis-container">Email: <span title="${d.data.email}}">${d.data.email}}</span></div>
-                                <div>Phone: ${d.data.phone}</div>
-                            </div>
-                        </div>
-                    </div>
+        });
+
+        return `
+          <div class="card emp-card-container">
+            <div class="card-block">
+              <div class="card-title emp-name-container">
+                <span class="emp-name">${d.data.name}</span>
+                <span class="context-menu-icon">
+                  <cds-icon shape="cog"></cds-icon>
+                </span>
+              </div>
+              <div class="card-text">
+                <div class="clr-row">
+                  <div class="clr-col-md-3 clr-col-sm-3">
+                    <cds-icon shape="user" [solid]="true" [size]="'xxl'" class="user-icon"></cds-icon>
+                  </div>
+                  <div class="clr-col-md-9 clr-col-sm-9">
+                    <div class="emp-designation elipsis-container">${d.data.position}</div>
+                    <div class="elipsis-container">Email: <span title="${d.data.email}">${d.data.email}</span></div>
+                    <div>Phone: ${d.data.phone}</div>
+                  </div>
                 </div>
-              </div>`;
+              </div>
+            </div>
+          </div>`;
       })
       .onNodeClick((s: string) => this.router.navigate([], { queryParams: { empId: s }}))
       .render()
@@ -90,7 +90,7 @@ export class GraphViewComponent {
   }
 
   private clickEvent(data: Employee, e: PointerEvent) {
-    e.stopPropagation();
+    e.stopPropagation(); 
     this.selectedEmployee = undefined;
     this.changeDetectorRef.detectChanges();
     this.selectedEmployee = data;
